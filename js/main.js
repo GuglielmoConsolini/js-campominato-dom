@@ -1,8 +1,13 @@
 // dichiaro variabile per il pulsante di inizio gioco
 let pulsante = document.querySelector("button")
+// dichiaro globalmente la variabile che sarà la griglia di contenimento delle celle
 let grid;
+// dichiaro  l'array contenente le caselle bomba senza dargli un valore
+let bombe
 // codice per impedire la creazione di altre griglie(mi sono aiutato con la documentazione su internet)
 let giocoAvviato = false
+// setto un punteggio iniziale
+let punteggio = 0
 
 // click per iniziare il gioco
 pulsante.addEventListener("click",function(){
@@ -12,23 +17,19 @@ pulsante.addEventListener("click",function(){
     } 
 })
 
-// dichiaro che l'array viene generato dalla funzione generaBombe nello scope globale
-let bombe = generaBombe();
-console.log(bombe);
-
-let punteggio = 0
 // funzione di inizio gioco + modaltà hard, medium , easy
 function avviaGioco(){
  
     punteggio = 0
 
-    let grid = document.getElementById("griglia");
+     grid = document.getElementById("griglia");
 
     // dichiaro come variabile la mia select , e ne dichiaro un altra che è uguale al suo Value
     let selectDifficolta = document.getElementById("difficolta");
     let difficoltàSelezionata = selectDifficolta.value;
 
-    
+    bombe = generaBombe(difficoltàSelezionata);
+    console.log(bombe);
     
     // if per gestire se il value è hard , in questo caso il ciclo stampa solo i quadrati necessari e rimuove le classi inutili
     if(difficoltàSelezionata === "hard"){
@@ -65,20 +66,26 @@ function avviaGioco(){
 
 // funzione per generare numeri casuali
 function generaNumeri(min,max){
-
  return Math.floor(Math.random() * (max - min) + min);
-
 }
 
 // funzione che mi crea l'array di bombe
-function generaBombe(){
+function generaBombe(difficoltà){
+
+    let numeroCelle;
+
+    if (difficoltà === "hard") {
+        numeroCelle = 49; 
+    } else if (difficoltà === "medium") {
+        numeroCelle = 81; 
+    } else {
+        numeroCelle = 100; 
+    }
 
     let bombe = [];
 
     while(bombe.length < 16){
-
-        let bomba = generaNumeri(1 , 101)
-
+        let bomba = generaNumeri(1 , numeroCelle + 1)
 // codice per impedire due bombe uguali
         if(!bombe.includes(bomba)){ 
             bombe.push(bomba);
@@ -86,6 +93,21 @@ function generaBombe(){
     }
     return bombe;
 }
+
+function fineGioco() {
+    // Rimuovi tutti i quadrati dalla griglia
+    if (punteggio < 0){
+        alert("HAI PERSO! Il gioco è finito.");
+        while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
+    }
+    
+    // Reimposta lo stato del gioco
+    giocoAvviato = false;
+    
+}
+
 // funzione per creare i quadrati nel virtual DOM
 function creaQuadrato(x){
 
@@ -94,6 +116,7 @@ function creaQuadrato(x){
     console.log(quadrato,x)
     return quadrato;
 }
+
 // funzione per gestire i click sui quadrati
 function clickQuadrato(quadrato,x){
 quadrato.addEventListener("click" , function(){
@@ -104,6 +127,7 @@ quadrato.addEventListener("click" , function(){
         punteggio -= 5
         console.log("punteggio" , punteggio)
         alert("Hai preso una Bomba! -5 punti")
+        fineGioco();
     }else{
         punteggio++
         console.log("punteggio" , punteggio)
@@ -116,15 +140,12 @@ quadrato.addEventListener("click" , function(){
     } else {
         quadrato.innerHTML = '';
     }
-
-    if(punteggio < 0){
-        alert("HAI PERSO")
-        giocoAvviato = false
-    }
-
     console.log(quadrato , x )
 })
 }
+
+
+
 
 
 
