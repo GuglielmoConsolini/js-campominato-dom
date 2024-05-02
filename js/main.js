@@ -55,6 +55,14 @@ function avviaGioco(){
     }
 }
 }
+
+// funzione per generare numeri casuali
+function generaNumeri(min,max){
+
+  Math.floor(Math.random() * (max - min) + min);
+
+}
+
 // funzione per creare i quadrati nel virtual DOM
 function creaQuadrato(x){
 
