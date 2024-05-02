@@ -1,13 +1,20 @@
 // dichiaro variabile per il pulsante di inizio gioco
 let pulsante = document.querySelector("button")
+
 // dichiaro globalmente la variabile che sarà la griglia di contenimento delle celle
 let grid;
+
 // dichiaro  l'array contenente le caselle bomba senza dargli un valore
 let bombe
+
 // codice per impedire la creazione di altre griglie(mi sono aiutato con la documentazione su internet)
 let giocoAvviato = false
+
 // setto un punteggio iniziale
 let punteggio = 0
+
+// Dichiarazione della variabile per l'elemento del punteggio
+let punteggioElement = document.getElementById("punteggio");
 
 // click per iniziare il gioco
 pulsante.addEventListener("click",function(){
@@ -127,10 +134,12 @@ quadrato.addEventListener("click" , function(){
         punteggio -= 5
         console.log("punteggio" , punteggio)
         alert("Hai preso una Bomba! -5 punti")
+        aggiornaPunteggio(punteggio);
         fineGioco();
     }else{
         punteggio++
         console.log("punteggio" , punteggio)
+        aggiornaPunteggio(punteggio);
     }
      
     quadrato.classList.toggle("evidenziato")
@@ -142,6 +151,11 @@ quadrato.addEventListener("click" , function(){
     }
     console.log(quadrato , x )
 })
+}
+
+// Funzione per aggiornare il punteggio e visualizzarlo nell'interfaccia utente
+function aggiornaPunteggio(punteggio) {
+    punteggioElement.textContent = "Punteggio: " + punteggio;
 }
 
 

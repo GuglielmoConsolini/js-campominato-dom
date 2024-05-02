@@ -21,6 +21,11 @@ button{
     padding: 1rem 1rem;
 }
 
+span{
+    color: red;
+    font-size: 40px;
+}
+
 i{
     padding: 0.5rem;
 }
