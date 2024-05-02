@@ -59,10 +59,27 @@ function avviaGioco(){
 // funzione per generare numeri casuali
 function generaNumeri(min,max){
 
-  Math.floor(Math.random() * (max - min) + min);
+ return Math.floor(Math.random() * (max - min) + min);
 
 }
 
+// funzione che mi crea l'array di bombe
+function generaBombe(){
+
+    let bombe = [];
+
+    while(bombe.length < 16){
+
+        let bomba = generaNumeri(1 , 101)
+        
+// codice per impedire due bombe uguali
+        if(!bombe.includes(bomba)){ 
+            bombe.push(bomba);
+        }
+        console.log(bombe , bomba)
+    }
+    return bombe;
+}
 // funzione per creare i quadrati nel virtual DOM
 function creaQuadrato(x){
 
