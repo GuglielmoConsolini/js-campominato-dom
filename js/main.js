@@ -1,6 +1,6 @@
 // dichiaro variabile per il pulsante di inizio gioco
 let pulsante = document.querySelector("button")
-
+let grid;
 // codice per impedire la creazione di altre griglie(mi sono aiutato con la documentazione su internet)
 let giocoAvviato = false
 
@@ -16,8 +16,11 @@ pulsante.addEventListener("click",function(){
 let bombe = generaBombe();
 console.log(bombe);
 
+let punteggio = 0
 // funzione di inizio gioco + modaltà hard, medium , easy
 function avviaGioco(){
+ 
+    punteggio = 0
 
     let grid = document.getElementById("griglia");
 
@@ -80,7 +83,6 @@ function generaBombe(){
         if(!bombe.includes(bomba)){ 
             bombe.push(bomba);
         }
-        
     }
     return bombe;
 }
@@ -99,6 +101,12 @@ quadrato.addEventListener("click" , function(){
 // con un if mi gestisco se l'utente clicca su un quadrato con la bomba e con classlist.add aggiungo la classe apposita
     if(bombe.includes(x)){
         quadrato.classList.add("esplosione")
+        punteggio -= 5
+        console.log("punteggio" , punteggio)
+        alert("Hai preso una Bomba! -5 punti")
+    }else{
+        punteggio++
+        console.log("punteggio" , punteggio)
     }
      
     quadrato.classList.toggle("evidenziato")
@@ -108,6 +116,12 @@ quadrato.addEventListener("click" , function(){
     } else {
         quadrato.innerHTML = '';
     }
+
+    if(punteggio < 0){
+        alert("HAI PERSO")
+        giocoAvviato = false
+    }
+
     console.log(quadrato , x )
 })
 }

@@ -18,4 +18,8 @@ M2
 
 M3
 
-1 
+1 Dichiaro la variabile punteggio = 0 nello scope globale e la richiamo dentro la funzione avviaGioco
+
+2 Nell'if dentro la funzione clickQuadrato specifico che se viene cliccata una cella con valore contenuto nell'array al punteggio verranno sottratti 5 punti invece di far finire subito la partita , e in un "else if" un contatore che aggiunge 1 punto al click di una cella sicura.
+
+3 In un altro "if" specifico che se il punteggio è minore di 0 l'utente riceverà un "alert" con il messaggio : "HAI PERSO"
