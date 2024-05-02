@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1{
+    text-align: center;
+    color: crimson;
+}
+
+button{
+    background-color: red;
+    color: black;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+}
+
+i{
+    padding: 0.5rem;
+}
+
+label{
+    color: crimson;
+}
+
+#griglia{
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square{
+    height: 60px;
+    width: 60px;
+    border: 1px solid white;
+}
+
+.evidenziato{
+    background-color: crimson;
+}
+
+.griglia-hard{
+    height: 420px;
+    width: 420px;
+}
+
+.griglia-medium{
+    width: 540px;
+    height: 540px;
+}
+
+.griglia-easy{
+    height: 600px;
+    width: 600px;
+}
