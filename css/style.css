@@ -42,7 +42,11 @@ label{
 }
 
 .evidenziato{
-    background-color: crimson;
+    background-color:green;
+}
+
+.esplosione{
+    background-color: red;
 }
 
 .griglia-hard{

@@ -12,7 +12,9 @@ pulsante.addEventListener("click",function(){
     } 
 })
 
-
+// dichiaro che l'array viene generato dalla funzione generaBombe nello scope globale
+let bombe = generaBombe();
+console.log(bombe);
 
 // funzione di inizio gioco + modaltà hard, medium , easy
 function avviaGioco(){
@@ -22,6 +24,8 @@ function avviaGioco(){
     // dichiaro come variabile la mia select , e ne dichiaro un altra che è uguale al suo Value
     let selectDifficolta = document.getElementById("difficolta");
     let difficoltàSelezionata = selectDifficolta.value;
+
+    
     
     // if per gestire se il value è hard , in questo caso il ciclo stampa solo i quadrati necessari e rimuove le classi inutili
     if(difficoltàSelezionata === "hard"){
@@ -71,12 +75,12 @@ function generaBombe(){
     while(bombe.length < 16){
 
         let bomba = generaNumeri(1 , 101)
-        
+
 // codice per impedire due bombe uguali
         if(!bombe.includes(bomba)){ 
             bombe.push(bomba);
         }
-        console.log(bombe , bomba)
+        
     }
     return bombe;
 }
@@ -91,6 +95,11 @@ function creaQuadrato(x){
 // funzione per gestire i click sui quadrati
 function clickQuadrato(quadrato,x){
 quadrato.addEventListener("click" , function(){
+
+// con un if mi gestisco se l'utente clicca su un quadrato con la bomba e con classlist.add aggiungo la classe apposita
+    if(bombe.includes(x)){
+        quadrato.classList.add("esplosione")
+    }
      
     quadrato.classList.toggle("evidenziato")
 
